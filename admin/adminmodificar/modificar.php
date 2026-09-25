@@ -146,11 +146,11 @@ if(isset($_POST['accion']) && $_POST['accion']=='actualizar_sub'){
                                 }
 
                                 $nuevaMedia = "imagen/fotoserieypelis/" . time() . '_' . basename($_FILES['media_sub']['name']);
-                                move_uploaded_file($_FILES['media_sub']['tmp_name'], BASE_URL.$nuevaMedia);
+                                move_uploaded_file($_FILES['media_sub']['tmp_name'], ROOT_PATH.$nuevaMedia);
 
                                 // borrar archivo anterior si era imagen/video local
-                                if($mediaVieja && file_exists(BASE_URL.$mediaVieja)){
-                                    unlink(BASE_URL.$mediaVieja);
+                                if($mediaVieja && file_exists(ROOT_PATH.$mediaVieja)){
+                                    unlink(ROOT_PATH.$mediaVieja);
                                 }
                             }
 
@@ -162,8 +162,8 @@ if(isset($_POST['accion']) && $_POST['accion']=='actualizar_sub'){
                                             $youtube = $match[1];
                                             $nuevaMedia = $youtube;
 
-                                            if($mediaVieja && file_exists(BASE_URL.$mediaVieja)){
-                                                unlink(BASE_URL.$mediaVieja);
+                                            if($mediaVieja && file_exists(ROOT_PATH.$mediaVieja)){
+                                                unlink(ROOT_PATH.$mediaVieja);
                                             }
 
                                         } else {
@@ -198,8 +198,8 @@ if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
                             ");
 
                             while($m = mysqli_fetch_assoc($resMedia)){
-                                if(file_exists(BASE_URL.$m['foto'])){
-                                    unlink(BASE_URL.$m['foto']);
+                                if(file_exists(ROOT_PATH.$m['foto'])){
+                                    unlink(ROOT_PATH.$m['foto']);
                                 }
                             }
 
@@ -425,6 +425,21 @@ if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
 
                                         $id = intval($_POST['idcom']);
 
+                                        /* 🔒 Verificar que el comentario pertenece a una noticia del usuario */
+                                        $stmt = $conn->prepare("
+                                            SELECT n.Idusuario FROM comentarios_noticias c
+                                            JOIN Noticias n ON n.Idnoticia = c.Idnoticia
+                                            WHERE c.id=?
+                                        ");
+                                        $stmt->bind_param("i", $id);
+                                        $stmt->execute();
+                                        $row = $stmt->get_result()->fetch_assoc();
+
+                                        if(!$row || $row['Idusuario'] != $_SESSION['id']){
+                                            header("Location: ".BASE_URL."index.php");
+                                            exit;
+                                        }
+
                                         // eliminar reacciones
                                         mysqli_query($conn,"
                                             DELETE FROM reacciones_comentarios
@@ -447,6 +462,21 @@ if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
                                 if(isset($_POST['accion']) && $_POST['accion']=='eliminar_completo'){
 
                                     $id = intval($_POST['idcom']);
+
+                                    /* 🔒 Verificar que el comentario pertenece a una noticia del usuario */
+                                    $stmt = $conn->prepare("
+                                        SELECT n.Idusuario FROM comentarios_noticias c
+                                        JOIN Noticias n ON n.Idnoticia = c.Idnoticia
+                                        WHERE c.id=?
+                                    ");
+                                    $stmt->bind_param("i", $id);
+                                    $stmt->execute();
+                                    $row = $stmt->get_result()->fetch_assoc();
+
+                                    if(!$row || $row['Idusuario'] != $_SESSION['id']){
+                                        header("Location: ".BASE_URL."index.php");
+                                        exit;
+                                    }
 
                                     // eliminar reacciones del comentario principal
                                     mysqli_query($conn,"
