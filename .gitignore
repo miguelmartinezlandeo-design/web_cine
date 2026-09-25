@@ -1,6 +1,9 @@
 # Credenciales y datos sensibles
 php/db_credentials.php
 
+# Volcados de base de datos (pueden contener datos de usuarios reales)
+database/
+
 # Archivos de sistema/editor
 .vscode/
 .DS_Store
