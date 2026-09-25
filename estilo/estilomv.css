@@ -1,0 +1,201 @@
+@media handheld{
+body{
+  width:98%;
+  font-family:Verdana;
+  font-size:16px;
+}
+}
+input[type=hidden]{
+  border: none;
+  padding: 0px 0px;
+  border-bottom: 0px;
+}
+form{
+  border: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-style: solid;
+  bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+.fondo{
+border-style: solid;
+border-color: black;
+margin-top: 1px;
+padding-top: 2px;
+display: table-row;
+background-image: url("fondo.svg");
+background-size:cover;
+
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #020220ff;
+  border: none;
+  color: white;
+  padding: 10% 100%;
+  text-decoration: none;
+  margin: 2px 0px;
+  cursor: pointer;
+  float: right;
+
+}
+
+input[type=submit].diferente{
+  background-color: #020220ff;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-decoration: none;
+  margin: 2px 0px;
+  cursor: pointer;
+  float: right;
+}
+input[type=submit].seguir{
+  background-color: #020220ff;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+  margin: 2px 0px;
+  cursor: pointer;
+  float: right;
+}
+
+
+@media screen{
+body{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width:auto;
+}
+}
+.Table{
+  display:table;
+  width: 100%;
+}
+.Primerafoto{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  margin-top: 1%;
+
+}
+.Table1{
+  display:grid;
+  width: 100%;
+  grid-column-gap: 10%;
+}
+.Table2{
+  display:table;
+  width: 100%;
+  height: 70%;
+}
+
+.CabecerayPie{
+  display: table-row;
+  height: 70%;
+  width: 70%;
+}
+
+.Celda{
+  display: table-cell;
+}
+.Celdaselect{
+  display: table-cell;
+  float: right;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.Celda1{
+  display: table-cell;
+  white-space: nowrap;
+}
+.Titulo {color:black;
+   font-size:12px;
+   text-indent:
+   font-family:Courier;
+   font-style:italic;
+   border:1px;
+   text-align:left;
+   border-color:blue;
+   border-style:solid;
+   width:80%;
+   height:40%;
+   background: pink;
+   margin: 0;
+   margin-top:2px;
+  text-indent: 1em;
+
+
+  }
+  .Titulo1 {color:black;
+     font-size:40%;
+     font-family:Courier;
+     font-style:italic;
+     text-align:left;
+     margin: 0;
+     text-shadow: 0.1em 0.1em 0.05em yellow;
+     margin-top: 5px;
+     text-indent: 1em;
+     position: absolute;
+    }
+.tamafoto{
+height: 90%;
+width: 100%;
+}
+.tamafoto1{
+height: 80%;
+width: 100%;
+}
+
+.Fotocabeceraypie{
+width: 100%;
+}
+
+
+.fotoizquierda1{
+  margin: 0;
+  height: 500px;
+  width: 100%;
+  background-image: url("/imagen/fotoserieypelis/stop.jpg");
+  background-repeat: repeat;
+  background-size: 50% 40%;
+  margin-top: 0%;
+  float: left;
+}
+.Titulo2 {color:black;
+   font-size:60px;
+   font-family:Courier;
+   font-style:italic;
+   margin: 0;
+   text-shadow: 0.1em 0.1em 0.05em yellow;
+   text-indent: 1em;
+   position:absolute;
+   margin-top: 5px;
+   white-space: initial;
+   width: 100%;
+  }
+
+.tamanosub{
+
+  height: 80%;
+  width: 100%;
+  float:right;
+  border-color:yellow;
+  margin: 0px 0px 0px 0px;
+  overflow: hidden;
+
+}
+.tamanosub img{
+  width: 100%;
+  height: auto;
+  color: blue;
+
+}
+.CabecerayPie1{
+  display: table-row;
+  position: relative;
+}

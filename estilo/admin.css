@@ -1,0 +1,265 @@
+/* ===============================
+   ADMIN PANEL BASE
+=================================*/
+
+body {
+    background:#f4f6f9;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-container{
+    max-width:1100px;
+    margin:40px auto;
+    background:#ffffff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+h2, h3{
+    margin-top:30px;
+    color:#333;
+}
+form{
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin:10px 0 5px;
+    font-weight:600;
+    color:#444;
+}
+
+
+input[type="text"],
+textarea,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    font-size:14px;
+    transition:0.2s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus{
+    border-color:#007bff;
+    outline:none;
+    box-shadow:0 0 5px rgba(0,123,255,0.2);
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+button{
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+    transition:0.2s;
+}
+
+button[type="submit"]{
+    background:#007bff;
+    color:#fff;
+}
+
+button[type="submit"]:hover{
+    background:#0056b3;
+}
+
+button[value="eliminar_sub"],
+button[value="eliminar_completo"],
+button[value="eliminar_respuesta"]{
+    background:#dc3545;
+    color:white;
+}
+
+button[value="eliminar_sub"]:hover,
+button[value="eliminar_completo"]:hover,
+button[value="eliminar_respuesta"]:hover{
+    background:#a71d2a;
+}
+
+.sub-box{
+    background:#f9fafc;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #e4e6ea;
+    margin-bottom:20px;
+}
+
+.comentario-admin{
+    background:#f8f9fa;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:15px;
+    border:1px solid #e0e0e0;
+}
+
+.respuesta-admin{
+    margin-left:40px;
+    border-left:4px solid #dee2e6;
+    padding-left:15px;
+    margin-top:10px;
+}
+
+.mensaje-ok{
+    background:#d4edda;
+    color:#155724;
+    padding:12px;
+    border-radius:6px;
+    margin:15px 0;
+    font-weight:600;
+}
+
+.mensaje-error{
+    background:#f8d7da;
+    color:#721c24;
+    padding:12px;
+    border-radius:6px;
+    margin:15px 0;
+    font-weight:600;
+}
+select{
+    background:#fff;
+    cursor:pointer;
+}
+
+/* GRID SUBNOTICIAS */
+.sub-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+.sub-box{
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.05);
+    transition:0.2s;
+}
+
+.sub-box:hover{
+    transform:translateY(-3px);
+}
+
+.preview-media{
+    margin:15px 0;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.preview-media img,
+.preview-media iframe{
+    width:100%;
+    border-radius:8px;
+}
+
+/*
+=============================================== Tabs
+*/
+
+.admin-tabs{
+    display:flex;
+    gap:15px;
+    border-bottom:2px solid #eee;
+    margin-bottom:20px;
+}
+
+.admin-tab{
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.admin-tab.active{
+    border-bottom:3px solid #007bff;
+    color:#007bff;
+}
+
+.tab-content{
+    display:none;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+
+.media-placeholder{
+    width:100%;
+    height:200px;
+    background:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    color:#fff;
+    font-size:14px;
+    flex-direction:column;
+}
+
+.media-placeholder span{
+    font-size:40px;
+    opacity:0.6;
+}
+
+.panel-estadisticas{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
+margin-bottom:30px;
+
+}
+
+.stat-box{
+
+background:white;
+border-radius:10px;
+padding:20px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+transition:0.2s;
+
+}
+
+.stat-box:hover{
+
+transform:translateY(-3px);
+
+}
+
+.stat-icon{
+
+font-size:30px;
+display:block;
+margin-bottom:10px;
+
+}
+
+.stat-num{
+
+font-size:26px;
+font-weight:bold;
+display:block;
+
+}
+
+.stat-label{
+
+color:#666;
+font-size:14px;
+
+}

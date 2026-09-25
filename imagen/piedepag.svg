@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="251.35416mm"
+   height="39.750492mm"
+   viewBox="0 0 251.35416 39.750492"
+   version="1.1"
+   id="svg3269"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="piedepag.svg">
+  <defs
+     id="defs3263">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2925"
+       id="linearGradient3159"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0558844,0,0,0.8240474,-2.1823997,55.483922)"
+       x1="69.925591"
+       y1="-8.8010035"
+       x2="336.06485"
+       y2="44.115665" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2925">
+      <stop
+         style="stop-color:#080124;stop-opacity:1;"
+         offset="0"
+         id="stop2921" />
+      <stop
+         style="stop-color:#080124;stop-opacity:0;"
+         offset="1"
+         id="stop2923" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="188.08358"
+     inkscape:cy="103.69047"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1368"
+     inkscape:window-height="836"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3266">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(35.718749,-139.54142)">
+    <g
+       id="g3157"
+       transform="translate(-29.630991,99.97226)">
+      <rect
+         ry="0.12863994"
+         y="39.865833"
+         x="-5.7910852"
+         height="39.157146"
+         width="250.76082"
+         id="rect1472-6"
+         style="opacity:1;fill:url(#linearGradient3159);fill-opacity:1;fill-rule:nonzero;stroke:#040404;stroke-width:0.5933454;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+      <text
+         transform="scale(0.97771074,1.0227974)"
+         id="text3136"
+         y="53.350605"
+         x="123.29604"
+         style="font-style:normal;font-weight:normal;font-size:5.57946968px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13948673"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:Waree;-inkscape-font-specification:Waree;stroke-width:0.13948673"
+           y="53.350605"
+           x="123.29604"
+           id="tspan3134"
+           sodipodi:role="line">Producido . Miguel Martinez Landeo</tspan></text>
+      <text
+         transform="scale(0.88953347,1.1241848)"
+         id="text3140"
+         y="54.596649"
+         x="135.48317"
+         style="font-style:normal;font-weight:normal;font-size:5.46281719px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13657042"
+         xml:space="preserve"><tspan
+           id="tspan3142"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.34811115px;font-family:Waree;-inkscape-font-specification:Waree;stroke-width:0.13657042"
+           y="54.596649"
+           x="135.48317"
+           sodipodi:role="line">e-mail . miguelmartinezlandeo@gmail.com</tspan></text>
+      <text
+         transform="scale(0.85097693,1.17512)"
+         id="text3148"
+         y="58.570145"
+         x="142.24591"
+         style="font-style:normal;font-weight:normal;font-size:5.96741104px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.14918527"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:Waree;-inkscape-font-specification:Waree;stroke-width:0.14918527"
+           y="58.570145"
+           x="142.24591"
+           id="tspan3146"
+           sodipodi:role="line">telf . 671802309</tspan></text>
+    </g>
+  </g>
+</svg>

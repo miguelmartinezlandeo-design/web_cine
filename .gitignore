@@ -1,0 +1,10 @@
+# Credenciales y datos sensibles
+php/db_credentials.php
+
+# Archivos de sistema/editor
+.vscode/
+.DS_Store
+*.log
+
+# Subidas de usuarios (no versionar imágenes generadas/subidas)
+php/imagen1/
