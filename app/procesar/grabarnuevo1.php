@@ -6,11 +6,11 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-                $categoria = $_POST['categoria'] ?? 0;
+                $categoria = (int) ($_POST['categoria'] ?? 0);
                 $titulo = $_POST['titulo'] ?? "";
                 $subtitulo = $_POST['subtitulo'] ?? "";
                 $texto = $_POST['textoarea'] ?? "";
-                $visualizar1 = $_POST['presentacion'] ?? 0;
+                $visualizar1 = (int) ($_POST['presentacion'] ?? 0);
 
                 $nombre_img = $_FILES['imagen']['name'];
                 $tamano_img = $_FILES['imagen']['size'];
@@ -30,10 +30,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                             if($idvisual!=""){
 
                                 /* Insertar noticia */
+                                $tituloEsc = mysqli_real_escape_string($conn, $titulo);
+                                $subtituloEsc = mysqli_real_escape_string($conn, $subtitulo);
+                                $textoEsc = mysqli_real_escape_string($conn, $texto);
+
                                 $insertar="INSERT INTO Noticias
                                         (Idcategoria,Titulo,Descrititulo,Texto,Idusuario)
                                         VALUES
-                                        ($idvisual,'$titulo','$subtitulo','$texto',".$_SESSION['id'].")";
+                                        ($idvisual,'$tituloEsc','$subtituloEsc','$textoEsc',".$_SESSION['id'].")";
 
                                 mysqli_query($conn,$insertar);
 
@@ -41,8 +45,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                                 $idnoticia=mysqli_insert_id($conn);
 
                                 /* Guardar imagen */
+                                $extPermitidas = ['jpg','jpeg','png','gif','webp','avif','jfif'];
+                                $ext = strtolower(pathinfo($nombre_img, PATHINFO_EXTENSION));
+
+                                if(!in_array($ext, $extPermitidas)){
+                                    echo "Formato de imagen no permitido";
+                                    exit;
+                                }
+
                                 $directorio = $_SERVER['DOCUMENT_ROOT'].'/ov1/imagen/fotoserieypelis/';
-                                $nombre_final = time().$nombre_img;
+                                $nombre_final = time().'_'.basename($nombre_img);
                                 
 
                                 $ruta_fisica = $directorio.$nombre_final;

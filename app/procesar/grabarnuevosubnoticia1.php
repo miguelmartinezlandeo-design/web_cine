@@ -38,23 +38,32 @@ if($tipo==1){
 }
 
 /* INSERTAR SUBNOTICIA SOLO SI TODO ESTA BIEN */
-$sql="INSERT INTO subnoticias(Idnoticia,subtitulo,descripcion)
-      VALUES($idx,'$subnoti','$textoam')";
-mysqli_query($conn,$sql);
+$stmt = $conn->prepare("INSERT INTO subnoticias(Idnoticia,subtitulo,descripcion) VALUES(?,?,?)");
+$stmt->bind_param("iss", $idx, $subnoti, $textoam);
+$stmt->execute();
 
 $idsub = mysqli_insert_id($conn);
 
 /* FOTO */
 if($tipo==0 && !empty($_FILES['imagen']['name'])){
 
-    $nombre = time().$_FILES['imagen']['name'];
+    $extPermitidas = ['jpg','jpeg','png','gif','webp','avif','jfif'];
+    $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+
+    if(!in_array($ext, $extPermitidas)){
+        header("Location: " . BASE_URL . "app/paginas/subnoticiagregar.php?id=".base64_encode($idx)."&error=formato");
+        exit;
+    }
+
+    $nombre = time().'_'.basename($_FILES['imagen']['name']);
     $ruta_fisica = $_SERVER['DOCUMENT_ROOT']."/ov1/imagen/fotoserieypelis/".$nombre;
     $ruta_bd = "/imagen/fotoserieypelis/".$nombre;
 
     move_uploaded_file($_FILES['imagen']['tmp_name'],$ruta_fisica);
 
-    mysqli_query($conn,"INSERT INTO Subnoticiafoto(Idsubnoticias,foto)
-                        VALUES($idsub,'$ruta_bd')");
+    $stmtFoto = $conn->prepare("INSERT INTO Subnoticiafoto(Idsubnoticias,foto) VALUES(?,?)");
+    $stmtFoto->bind_param("is", $idsub, $ruta_bd);
+    $stmtFoto->execute();
 }
 
 /* VIDEO */
@@ -68,8 +77,9 @@ if($tipo==1){
         $_POST['youtubev']
     );
 
-    mysqli_query($conn,"INSERT INTO Subnoticiafoto(Idsubnoticias,foto)
-                        VALUES($idsub,'$video')");
+    $stmtVideo = $conn->prepare("INSERT INTO Subnoticiafoto(Idsubnoticias,foto) VALUES(?,?)");
+    $stmtVideo->bind_param("is", $idsub, $video);
+    $stmtVideo->execute();
 }
 
 /* REDIRECCION */

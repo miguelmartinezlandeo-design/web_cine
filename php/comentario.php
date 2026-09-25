@@ -9,10 +9,10 @@ function renderComentario($conn, $comentario){
         ? "comentario-item respuesta-item"
         : "comentario-item";
 
-    echo "<div class='$clase' data-id='".$comentario['id']."'>";
+    echo "<div class='$clase' data-id='".(int)$comentario['id']."'>";
 
-    echo "<strong>".$comentario['nombre']."</strong>";
-    echo "<p>".$comentario['comentario']."</p>";
+    echo "<strong>".htmlspecialchars($comentario['nombre'], ENT_QUOTES, 'UTF-8')."</strong>";
+    echo "<p>".nl2br(htmlspecialchars($comentario['comentario'], ENT_QUOTES, 'UTF-8'))."</p>";
 
     // Mostrar reacciones SIEMPRE
     mostrarReacciones($conn, $comentario['id']);

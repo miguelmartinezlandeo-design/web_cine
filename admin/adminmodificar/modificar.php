@@ -13,8 +13,8 @@ if(empty($_SESSION['id'])){
 }
 include (__DIR__ . '/../../app/vistas/layout_privado_cabezera.php');
 
-$categoria = $_GET['categoria'] ?? '';
-$noticiaSeleccionada = $_GET['noticia'] ?? '';
+$categoria = isset($_GET['categoria']) ? (int) $_GET['categoria'] : 0;
+$noticiaSeleccionada = isset($_GET['noticia']) ? (int) $_GET['noticia'] : 0;
 
 if(!$categoria){
       header("Location: ". BASE_URL ."usuarioadmin.php");
