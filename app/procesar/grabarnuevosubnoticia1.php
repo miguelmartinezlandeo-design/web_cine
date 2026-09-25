@@ -4,7 +4,23 @@ require_once __DIR__ . '/../../php/config.php';
 
 $conn = mysqli_connect($servername,$username,$password,$database);
 
-$idx = base64_decode($_POST['id']);
+if(empty($_SESSION['id'])){
+    header("Location: " . BASE_URL . "index.php");
+    exit;
+}
+
+$idx = (int) base64_decode($_POST['id']);
+
+$stmt = $conn->prepare("SELECT Idusuario FROM Noticias WHERE Idnoticia=?");
+$stmt->bind_param("i", $idx);
+$stmt->execute();
+$row = $stmt->get_result()->fetch_assoc();
+
+if(!$row || $row['Idusuario'] != $_SESSION['id']){
+    header("Location: " . BASE_URL . "index.php");
+    exit;
+}
+
 $subnoti = $_POST['subnoticiax'];
 $textoam = $_POST['textogrande'];
 $tipo = $_POST['rad'];

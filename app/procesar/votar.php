@@ -18,7 +18,9 @@ if(!$id || !$tipo){
     exit;
 }
 
-$ip = $_SERVER['REMOTE_ADDR'];
+$id = (int) $id;
+$tipo = mysqli_real_escape_string($conn, $tipo);
+$ip = mysqli_real_escape_string($conn, $_SERVER['REMOTE_ADDR']);
 
 /* Crear cookie si no existe */
 if(!isset($_COOKIE['usuario_unico'])){
@@ -27,6 +29,7 @@ if(!isset($_COOKIE['usuario_unico'])){
 } else {
     $cookie_id = $_COOKIE['usuario_unico'];
 }
+$cookie_id = mysqli_real_escape_string($conn, $cookie_id);
 
 /* Verificar si ya votó */
 $check = mysqli_query($conn,"

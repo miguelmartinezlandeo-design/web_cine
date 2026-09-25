@@ -1,8 +1,5 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors',1);
-error_reporting(E_ALL);
 
 require_once '../php/config.php';
     
@@ -15,8 +12,10 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     $nombre = $_POST['usuario'] ?? '';
     $password = $_POST['contrasena'] ?? '';
 
-                $sql="SELECT * FROM Usuarios WHERE Alias='$nombre'";
-                $resultado=mysqli_query($conn,$sql);
+                $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE Alias=?");
+                $stmt->bind_param("s", $nombre);
+                $stmt->execute();
+                $resultado = $stmt->get_result();
 
                     if($resultado && mysqli_num_rows($resultado)==1){
                         $fila=mysqli_fetch_assoc($resultado);

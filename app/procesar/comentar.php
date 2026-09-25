@@ -12,9 +12,12 @@ if(!$id || !$nombre || !$comentario){
     echo json_encode(['status'=>'error','msg'=>'Datos incompletos']);
     exit;
 }
+
+$id = (int) $id;
+$nombre = mysqli_real_escape_string($conn, $nombre);
+$ip = mysqli_real_escape_string($conn, $_SERVER['REMOTE_ADDR']);
 //=================== filtrar palabras
 $comentario = filtrarPalabras($comentario);
-$ip = $_SERVER['REMOTE_ADDR'];
 
 if(!isset($_COOKIE['usuario_unico'])){
     $cookie_id = uniqid('user_', true);
@@ -22,6 +25,8 @@ if(!isset($_COOKIE['usuario_unico'])){
 }else{
     $cookie_id = $_COOKIE['usuario_unico'];
 }
+$cookie_id = mysqli_real_escape_string($conn, $cookie_id);
+$comentario_esc = mysqli_real_escape_string($conn, $comentario);
 
 /* ---- LIMITE 3 POR IP ---- */
 $limite = mysqli_query($conn,"
@@ -41,7 +46,7 @@ if($data['total'] >= 3){
 $repetido = mysqli_query($conn,"
     SELECT id FROM comentarios_noticias
     WHERE Idnoticia='$id'
-    AND comentario='$comentario'
+    AND comentario='$comentario_esc'
     AND ip='$ip'
 ");
 
@@ -50,13 +55,13 @@ if(mysqli_num_rows($repetido) > 0){
     exit;
 }
 /* inserta noticias a la vez que hoy hemos ingresado una columna para enlazar con sus comentarios */
-            $parent_id = $_POST['parent_id'] ?? NULL;
+            $parent_id = isset($_POST['parent_id']) ? (int) $_POST['parent_id'] : null;
 
             mysqli_query($conn,"
             INSERT INTO comentarios_noticias
             (Idnoticia,nombre,comentario,ip,cookie_id,estado,parent_id)
             VALUES
-            ('$id','$nombre','$comentario','$ip','$cookie_id','aprobado',".($parent_id ? "'$parent_id'" : "NULL").")
+            ('$id','$nombre','$comentario_esc','$ip','$cookie_id','aprobado',".($parent_id ? "'$parent_id'" : "NULL").")
             ");
 
 /* Obtener comentario recién insertado */

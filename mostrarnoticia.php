@@ -8,7 +8,7 @@ require_once 'php/visitas.php';
    1. Obtener ID seguro
 ================================= */
 $id_url = $_GET['id'] ?? $_POST['id'] ?? '';
-$id = base64_decode(urldecode($id_url));
+$id = (int) base64_decode(urldecode($id_url));
 
 if (!$id) {
     header('Location: index.php');

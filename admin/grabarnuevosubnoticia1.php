@@ -11,7 +11,7 @@ if(empty($_SESSION['id'])){
 }
 
 
-$idx = base64_decode($_POST['id']);
+$idx = (int) base64_decode($_POST['id']);
 //========================================================
 $stmt = $conn->prepare("SELECT Idusuario FROM Noticias WHERE Idnoticia=?");
 $stmt->bind_param("i", $idx);

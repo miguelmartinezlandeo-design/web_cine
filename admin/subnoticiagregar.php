@@ -10,7 +10,7 @@ if(empty($_SESSION['id'])){
     header("Location: " . BASE_URL . "index.php");
     exit;
 }
-$id = isset($_GET['id']) ? base64_decode($_GET['id']) : 0;
+$id = isset($_GET['id']) ? (int) base64_decode($_GET['id']) : 0;
 
 /* NOTICIA */
 $sqlnoticia="SELECT * FROM Noticias WHERE Idnoticia=$id";
