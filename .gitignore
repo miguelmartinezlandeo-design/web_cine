@@ -1,5 +1,8 @@
 # Credenciales y datos sensibles
+db_credentials.php
 php/db_credentials.php
+php/db_credentials.*.php
+!php/db_credentials.example.php
 
 # Volcados de base de datos (pueden contener datos de usuarios reales)
 database/
