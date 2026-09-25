@@ -177,7 +177,7 @@ while($sub = mysqli_fetch_array($res_sub)){
 				?>
 </div>
 <input type="text" id="id-noticia" value="<?= $id ?>">
-<script type="module" src="js/core.js"></script>
+<script type="module" src="js/core.js?v=<?= filemtime(ROOT_PATH.'js/core.js') ?>"></script>
 </body>
 </html>
 

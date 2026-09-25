@@ -1,5 +1,5 @@
 
-import { post } from './api.js';
+import { post } from './api.js?v=2';
 
 export function initComentarios(){
 
