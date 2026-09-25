@@ -32,7 +32,7 @@ $res_noticias = mysqli_query($conn,"
 
 if(isset($_POST['accion']) && $_POST['accion'] == 'actualizar_noticia'){
 
-    $idn = $_POST['idnoticia'];
+    $idn = intval($_POST['idnoticia']);
     $titulo = $_POST['titulo'];
     $texto = $_POST['texto'];
 
@@ -56,6 +56,15 @@ if(isset($_POST['accion']) && $_POST['accion'] == 'actualizar_noticia'){
 
     // Imagen nueva
     if(!empty($_FILES['imagen']['name'])){
+
+        $extPermitidas = ['jpg','jpeg','png','gif','webp','avif','jfif'];
+        $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+
+        if(!in_array($ext, $extPermitidas)){
+            $_SESSION['mensaje_error'] = "Formato de imagen no permitido";
+            header("Location: modificar.php?categoria=$categoria&noticia=$idn");
+            exit;
+        }
 
         $nombreImagen = time() . '_' . basename($_FILES['imagen']['name']);
         $ruta = "imagen/fotoserieypelis/" . $nombreImagen;
@@ -127,7 +136,16 @@ if(isset($_POST['accion']) && $_POST['accion']=='actualizar_sub'){
                             // 3️⃣ Si sube archivo nuevo
                             if(!empty($_FILES['media_sub']['name'])){
 
-                                $nuevaMedia = "imagen/fotoserieypelis/" . $_FILES['media_sub']['name'];
+                                $extPermitidas = ['jpg','jpeg','png','gif','webp','avif','jfif'];
+                                $ext = strtolower(pathinfo($_FILES['media_sub']['name'], PATHINFO_EXTENSION));
+
+                                if(!in_array($ext, $extPermitidas)){
+                                    $_SESSION['mensaje_error'] = "Formato de archivo no permitido";
+                                    header("Location: ".$_SERVER['HTTP_REFERER']);
+                                    exit;
+                                }
+
+                                $nuevaMedia = "imagen/fotoserieypelis/" . time() . '_' . basename($_FILES['media_sub']['name']);
                                 move_uploaded_file($_FILES['media_sub']['tmp_name'], BASE_URL.$nuevaMedia);
 
                                 // borrar archivo anterior si era imagen/video local
@@ -171,7 +189,7 @@ if(isset($_POST['accion']) && $_POST['accion']=='actualizar_sub'){
 
 if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
 
-                            $idsub = $_POST['idsub'];
+                            $idsub = intval($_POST['idsub']);
 
                             // borrar media
                             $resMedia = mysqli_query($conn,"
@@ -234,7 +252,16 @@ if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
                                         // Imagen
                                         if($tipo == "imagen" && !empty($_FILES['media_sub']['name'])){
 
-                                            $nombre = time().$_FILES['media_sub']['name'];
+                                            $extPermitidas = ['jpg','jpeg','png','gif','webp','avif','jfif'];
+                                            $ext = strtolower(pathinfo($_FILES['media_sub']['name'], PATHINFO_EXTENSION));
+
+                                            if(!in_array($ext, $extPermitidas)){
+                                                $_SESSION['mensaje_error'] = "Formato de archivo no permitido";
+                                                header("Location: ".$_SERVER['HTTP_REFERER']);
+                                                exit;
+                                            }
+
+                                            $nombre = time().basename($_FILES['media_sub']['name']);
                                             $rutaFisica = $_SERVER['DOCUMENT_ROOT']."/ov1/imagen/fotoserieypelis/".$nombre;
                                             $rutaBD = "/imagen/fotoserieypelis/".$nombre;
 
@@ -396,7 +423,7 @@ if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
 //=====================================================================
                                     if(isset($_POST['accion']) && $_POST['accion']=='eliminar_respuesta'){
 
-                                        $id = $_POST['idcom'];
+                                        $id = intval($_POST['idcom']);
 
                                         // eliminar reacciones
                                         mysqli_query($conn,"
@@ -419,7 +446,7 @@ if(isset($_POST['accion']) && $_POST['accion']=='eliminar_sub'){
 
                                 if(isset($_POST['accion']) && $_POST['accion']=='eliminar_completo'){
 
-                                    $id = $_POST['idcom'];
+                                    $id = intval($_POST['idcom']);
 
                                     // eliminar reacciones del comentario principal
                                     mysqli_query($conn,"
