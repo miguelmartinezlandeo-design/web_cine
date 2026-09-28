@@ -144,7 +144,15 @@ display:none;
 .pie{
     text-align:center;
     margin-top:40px;
+    padding:20px 0;
     color:#000;
+}
+
+.pie-img{
+    max-width:900px;
+    width:100%;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 /* ===== FORMULARIOS ADMINISTRACION ===== */
 .form-admin{

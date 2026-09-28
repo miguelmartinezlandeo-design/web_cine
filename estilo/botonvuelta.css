@@ -7,8 +7,8 @@
     align-items:center;
     gap:6px;
     background:#fff;
-    color:#001f5b;
-    border:1px solid #001f5b;
+    color:var(--color-primario);
+    border:1px solid var(--color-primario);
     padding:8px 12px;
     border-radius:8px;
     font-size:13px;
@@ -21,7 +21,7 @@
 .btn-ver-sitio:hover{
     transform:translateY(-2px);
     box-shadow:0 4px 10px rgba(0,31,91,0.24);
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
 }
 
