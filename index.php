@@ -112,7 +112,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 </main>
 
 <section class="seccion-archivo">
-<h2 style="text-align:center;margin-top:50px;color:#444;font-family:sans-serif;">
+<h2 class="titulo-seccion">
 Más Noticias
 </h2>
 <?php require_once 'app/vistas/2columnas.php'; ?>

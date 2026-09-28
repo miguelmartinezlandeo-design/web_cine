@@ -154,6 +154,13 @@ display:none;
     border-radius:10px;
     box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
+
+.titulo-seccion{
+    text-align:center;
+    margin-top:50px;
+    color:#444;
+    font-family:sans-serif;
+}
 /* ===== FORMULARIOS ADMINISTRACION ===== */
 .form-admin{
     background:white;
@@ -322,6 +329,16 @@ border-radius:10px;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+}
+
+.tarjeta-info{
+    padding:10px;
+}
+
+.tarjeta-info h3{
+    margin:0;
+    font-size:14px;
+    color:#333;
 }
 
 /* NOTICIA PRINCIPAL */

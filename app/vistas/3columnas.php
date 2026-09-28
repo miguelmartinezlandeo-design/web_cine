@@ -9,7 +9,7 @@ if(mysqli_num_rows($result) >= 1){
     echo "<div class='noticia-principal-v2'>
             <a href='mostrarnoticia.php?id=$id_e'>
                 <div class='caja-foto-grande'>
-                    <img src='".BASE_URL."/".$foto['Foton']."' style='width:100%; height:100%; object-fit:cover;'>
+                    <img src='".BASE_URL."/".$foto['Foton']."'>
                     <div class='texto-titular'>
                         <h2>{$row['Titulo']}</h2>
                     </div>
@@ -29,8 +29,8 @@ if(mysqli_num_rows($result) >= 1){
                     <div class='crop-foto'>
                         <img src='".BASE_URL.$foto['Foton']."'>
                     </div>
-                    <div style='padding:10px;'>
-                        <h3 style='margin:0; font-size:14px; color:#333;'>{$row['Titulo']}</h3>
+                    <div class='tarjeta-info'>
+                        <h3>{$row['Titulo']}</h3>
                     </div>
                 </a>
               </div>";
