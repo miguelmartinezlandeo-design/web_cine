@@ -759,6 +759,23 @@ box-shadow:0 2px 8px rgba(0,0,0,0.05);
     margin-bottom:10px;
     color:#111;
 }
+
+.header-noticia{
+    margin-bottom:10px;
+}
+
+.fecha{
+    display:block;
+    font-size:14px;
+    color:#777;
+}
+
+.subnoticia-item{
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px solid #eee;
+}
+
 .noticia-completa h2{
     font-family:'Poppins', sans-serif;
     font-size:24px;
@@ -802,12 +819,34 @@ Es para él me gusta y no me gusta los estilos
 ==================================================================
 */
 
+.votos-form{
+    display:flex;
+    gap:12px;
+    margin:15px 0 25px;
+}
+
 .votos-form button{
+    padding:8px 18px;
+    border:none;
+    border-radius:20px;
+    background:#eee;
+    font-size:15px;
+    cursor:pointer;
     transition: all 0.3s ease;
+}
+
+.votos-form button:hover{
+    background:var(--color-primario);
+    color:white;
 }
 
 .votos-form button:active{
     transform: scale(0.95);
+}
+
+.votos-form button:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
 }
 
 /*================================================================== 
