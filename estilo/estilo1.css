@@ -1,3 +1,12 @@
+/* ===== VARIABLES GLOBALES ===== */
+:root{
+    --color-primario: #001f5b;
+    --color-primario-hover: #003399;
+    --color-fondo: #f2f2f2;
+    --color-error: #c40000;
+    --color-error-alt: #c82333;
+}
+
 /* ===== RESET GENERAL ===== */
 *{
 box-sizing:border-box;
@@ -6,7 +15,7 @@ box-sizing:border-box;
 body{
     margin:0;
     padding:0;
-    background:#f2f2f2;
+    background:var(--color-fondo);
     font-family: 'Merriweather', serif;
 }
 
@@ -32,10 +41,6 @@ padding:0;
     align-items:center;
     justify-content:center;
 }
-/* ===== CABECERA APP DESKTOP ===== */
-
-/* ===== CABECERA APP DESKTOP ===== */
-
 /* ===== CABECERA APP DESKTOP ===== */
 
 .cabecera-app{
@@ -126,13 +131,13 @@ display:none;
     padding:10px 25px;
     border:none;
     border-radius:6px;
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
     cursor:pointer;
 }
 
 .botones-login input:hover{
-    background:#003399;
+    background:var(--color-primario-hover);
 }
 
 /* ===== PIE ===== */
@@ -153,7 +158,7 @@ display:none;
 
 .form-admin h2{
     text-align:center;
-    color:#001f5b;
+    color:var(--color-primario);
     margin-bottom:20px;
 }
 
@@ -176,7 +181,7 @@ display:none;
 .form-admin input:focus,
 .form-admin textarea:focus,
 .form-admin select:focus{
-    border-color:#003399;
+    border-color:var(--color-primario-hover);
     box-shadow:0 0 5px rgba(0,51,153,0.3);
     outline:none;
 }
@@ -187,7 +192,7 @@ display:none;
     padding:12px 25px;
     border:none;
     border-radius:8px;
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
     font-size:15px;
     cursor:pointer;
@@ -195,14 +200,14 @@ display:none;
 }
 
 .form-admin input[type=submit]:hover{
-    background:#003399;
+    background:var(--color-primario-hover);
 }
 /* TIPOGRAFIA LABEL FORMULARIOS */
 .form-admin label{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size:16px;
     font-weight:600;
-    color:#001f5b;
+    color:var(--color-primario);
     letter-spacing:0.3px;
 }
 
@@ -219,7 +224,7 @@ display:none;
 }
 
 .admin-panel h2{
-    color:#001f5b;
+    color:var(--color-primario);
     margin-bottom:25px;
 }
 
@@ -244,7 +249,7 @@ display:none;
 #aviso{
     margin-top:10px;
     font-weight:bold;
-    color:#c40000;
+    color:var(--color-error);
 }
 /* Imagen principal noticia */
 .img-principal{
@@ -507,7 +512,7 @@ text-shadow:1px 1px 3px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.6);
 .contenido-noticia {
     margin: 28px 0 38px;
     padding: 24px 28px;
-    border-left: 5px solid #001f5b;
+    border-left: 5px solid var(--color-primario);
     background: #f8fafc;
     color: #2f3540;
     font-size: 18px;
@@ -518,7 +523,7 @@ text-shadow:1px 1px 3px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.6);
 }
 
 .contenido-noticia::first-letter {
-    color: #001f5b;
+    color: var(--color-primario);
     float: left;
     font-family: 'Poppins', sans-serif;
     font-size: 3.4em;
@@ -599,15 +604,15 @@ text-shadow:1px 1px 3px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.6);
 }
 
 .filtro-botones a:hover{
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
-    border-color:#001f5b;
+    border-color:var(--color-primario);
 }
 
 .filtro-botones a.activo{
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
-    border-color:#001f5b;
+    border-color:var(--color-primario);
 }
 
 /* ===== BARRA SUPERIOR UNIFICADA ===== */
@@ -681,7 +686,7 @@ html, body{ overflow-x:hidden; }
     border-radius:30px;
     font-size:14px;
     font-weight:500;
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
     transition:all 0.3s ease;
     position:relative;
@@ -689,7 +694,7 @@ html, body{ overflow-x:hidden; }
 }
 
 .btn-paginacion:hover{
-    background:#003399;
+    background:var(--color-primario-hover);
     transform:translateY(-2px);
     box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
@@ -712,7 +717,7 @@ justify-content:space-between;
 margin:15px auto 20px auto;
 position:sticky;
 top:0;
-background:#f2f2f2;
+background:var(--color-fondo);
 padding:10px 0;
 z-index:1000;
 box-shadow:0 2px 8px rgba(0,0,0,0.05);
@@ -734,7 +739,7 @@ box-shadow:0 2px 8px rgba(0,0,0,0.05);
     font-size:24px;
     font-weight:600;
     margin-top:30px;
-    color:#001f5b;
+    color:var(--color-primario);
 }
 .noticia-completa p,
 .texto-sub{
@@ -762,7 +767,7 @@ form button{
 }
 
 form button:hover{
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
 }
 
@@ -799,7 +804,7 @@ aquí es para darle diseño a los comentarios de donde se muestran las noticias
 
 .form-comentario button{
     padding:8px 18px;
-    background:#001f5b;
+    background:var(--color-primario);
     color:white;
     border:none;
     border-radius:20px;
@@ -815,7 +820,7 @@ aquí es para darle diseño a los comentarios de donde se muestran las noticias
 
 .error-comentario{
     background:#fdecea;
-    color:#c82333;
+    color:var(--color-error-alt);
     padding:12px;
     border-radius:8px;
     margin-bottom:10px;
@@ -838,7 +843,7 @@ reacciones a los comentarios está mucho chulo
 
 .reacciones button{
     border:none;
-    background:#f2f2f2;
+    background:var(--color-fondo);
     padding:4px 10px;
     border-radius:20px;
     cursor:pointer;
@@ -917,8 +922,8 @@ Jerarquia del sub comentario*/
     /* botones categoria */ 
     .superior-centro a{ 
         flex:0 0 auto; padding:6px 16px; background:#fff; border-radius:20px; border:1px solid #ddd; font-size:14px; white-space:nowrap; transition:all 0.3s ease; } 
-        .superior-centro a:hover{ background:#001f5b; color:white; } 
-        .superior-centro a.activo{ background:#001f5b; color:white; } 
+        .superior-centro a:hover{ background:var(--color-primario); color:white; } 
+        .superior-centro a.activo{ background:var(--color-primario); color:white; } 
         /* ================================ MENU HAMBURGUESA ================================ */ /* MENU DESPLEGABLE, empuja el contenido de abajo en vez de flotar sobre el logo */ 
         .menu-movil{ max-width:900px; margin:0 auto; width:100%; max-height:0; 
             overflow:hidden; background:white; 
@@ -932,7 +937,7 @@ Jerarquia del sub comentario*/
         .menu-movil.activo{ max-height:500px; } }
         
         @media (max-width:768px){ 
-            .hamburger{ background:#001f5b; color:white; border:none; width:36px; height:36px; border-radius:8px; font-size:18px; display:flex; align-items:center; justify-content:center; cursor:pointer; } } 
+            .hamburger{ background:var(--color-primario); color:white; border:none; width:36px; height:36px; border-radius:8px; font-size:18px; display:flex; align-items:center; justify-content:center; cursor:pointer; } } 
         @media (max-width:768px){ 
             .cabecera-img{ max-height:90px; object-fit:contain; } /* logo */ 
             .logo-app{ width:auto; flex:1; min-width:0; margin:0; justify-content:flex-start; } 
