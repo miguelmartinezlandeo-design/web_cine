@@ -21,10 +21,10 @@ setTimeout(function(){
     var el = document.querySelector(s);
     if(!el){ out[s]="MISSING"; return; }
     var r = el.getBoundingClientRect(), c = getComputedStyle(el);
-    out[s] = "box=" + Math.round(r.width) + "x" + Math.round(r.height) + "@" + Math.round(r.top)
-      + " | disp=" + c.display + " gtc=" + c.gridTemplateColumns.slice(0,60)
-      + " rad=" + c.borderRadius + " fs=" + c.fontSize + " fw=" + c.fontWeight
-      + " ff=" + c.fontFamily.split(",")[0] + " sh=" + (c.boxShadow||"none").slice(0,34);
+    out[s] = "L=" + Math.round(r.left) + " R=" + Math.round(document.documentElement.clientWidth - r.right)
+      + " W=" + Math.round(r.width) + " H=" + Math.round(r.height) + " top=" + Math.round(r.top)
+      + " | disp=" + c.display + " gtc=" + c.gridTemplateColumns.slice(0,52)
+      + " rad=" + c.borderRadius + " fs=" + c.fontSize + " fw=" + c.fontWeight;
   });
   out.counts = {
     tarjetas: document.querySelectorAll(".tarjeta-noticia").length,
