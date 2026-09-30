@@ -15,7 +15,7 @@
     --mx-accent:       #f5c518;   /* amarillo de marca (sobre tinta)   */
 
     /* Neutros */
-    --mx-canvas:       #f4f5f7;
+    --mx-canvas:       #f8f9fa;   /* fondo claro del sitio (ver AGENTS.md) */
     --mx-surface:      #ffffff;
     --mx-ink:          #0f0d18;
     --mx-ink-soft:     #3f3d4d;
@@ -104,49 +104,34 @@
 }
 
 /* ========================= 3. MASTHEAD ========================= */
-/* Sangria a sangre para que el header comparta los mismos bordes que la
-   barra sticky de abajo (antes el header mide 1116 y la barra 1180). */
+/* AGENTS.md: la cabecera se alinea con el ancho del contenedor principal,
+   se integra con el fondo claro (#f8f9fa) y NO es un banner rigido.
+   Sin sangria, sin borde inferior, sin sombra: fluye con la pagina. */
 .portada .cabecera-app{
-    max-width:none;
-    width:auto;
-    margin:0 calc(-1 * clamp(16px, 4vw, 32px));
-    padding:30px clamp(16px, 4vw, 32px) 26px;
+    max-width:100%;
+    width:100%;
+    margin:0;
+    padding:16px 0 6px;
     background:transparent;
-    border-bottom:1px solid var(--mx-line);
-}
-
-/* Regla de acento bajo el logo */
-.portada .cabecera-app::after{
-    content:"";
-    display:block;
-    width:150px;
-    height:3px;
-    margin:22px auto 0;
-    border-radius:var(--mx-r-pill);
-    background:linear-gradient(90deg,
-        rgba(66,119,15,0),
-        var(--mx-brand) 35%,
-        var(--mx-accent) 65%,
-        rgba(245,197,24,0));
+    border-bottom:none;
 }
 
 .portada .logo-app{
     width:100%;
-    max-width:none;
-    margin:0 auto;
+    max-width:100%;
+    margin:0;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-/* El logo natural es 950x182: antes se renderizaba al 46% (438x84).
-   Ahora ocupa hasta 880px de ancho real. */
+/* AGENTS.md: logo totalmente responsive en escritorio y movil.
+   width/max-width 100%, height auto, object-fit contain. */
 .portada .logo-app img.logo-desktop{
     width:100%;
-    max-width:880px;
+    max-width:100%;
     height:auto;
     object-fit:contain;
-    filter:drop-shadow(0 12px 26px rgba(15,13,24,.16));
 }
 
 /* Boton hamburguesa (solo movil) */
@@ -174,16 +159,17 @@
     display:flex;
     align-items:center;
     gap:16px;
-    /* Sangria a sangre: el wrapper trae padding lateral, lo compensamos */
-    width:auto;
-    max-width:none;
-    margin:0 calc(-1 * clamp(16px, 4vw, 32px)) 24px;
-    padding:12px clamp(16px, 4vw, 32px);
-    background:rgba(255,255,255,.82);
+    /* Mismo ancho que el contenido: cabecera, botones y tarjetas alineados */
+    width:100%;
+    max-width:100%;
+    margin:0 0 24px;
+    padding:12px 16px;
+    background:rgba(248,249,250,.86);
     -webkit-backdrop-filter:blur(14px) saturate(1.6);
     backdrop-filter:blur(14px) saturate(1.6);
-    border-bottom:1px solid var(--mx-line);
-    box-shadow:0 1px 0 rgba(15,13,24,.02), 0 6px 18px rgba(15,13,24,.04);
+    border:1px solid var(--mx-line);
+    border-radius:var(--mx-r-md);
+    box-shadow:var(--mx-shadow-sm);
 }
 
 .portada .superior-izq{
@@ -658,16 +644,17 @@
         display:flex;
         align-items:center;
         gap:12px;
-        margin:0 calc(-1 * clamp(16px, 4vw, 32px));
-        padding:12px clamp(16px, 4vw, 32px);
-        background:rgba(255,255,255,.9);
+        width:100%;
+        max-width:100%;
+        margin:0;
+        padding:12px 16px;
+        /* Translucido sobre el propio fondo del sitio: se integra, no banda */
+        background:rgba(248,249,250,.92);
         -webkit-backdrop-filter:blur(14px) saturate(1.6);
         backdrop-filter:blur(14px) saturate(1.6);
-        box-shadow:var(--mx-shadow-sm);
+        border-bottom:1px solid var(--mx-line);
+        box-shadow:none;
         z-index:2000;
-    }
-    .portada .cabecera-app::after{
-        display:none;
     }
     .portada .hamburger{
         display:flex;
@@ -683,24 +670,17 @@
         margin:0;
         justify-content:flex-start;
     }
+    /* El logo real se mantiene en movil y escala con las reglas de AGENTS.md.
+       !important: estilo1.css oculta .logo-desktop con !important en movil. */
     .portada .logo-app img.logo-desktop{
-        display:none !important;
+        display:block !important;
+        width:100%;
+        max-width:100%;
+        height:auto;
+        object-fit:contain;
     }
     .portada .marca-movil{
-        display:flex;
-        flex:0 1 auto;
-        align-items:center;
-        gap:10px;
-        padding:11px 22px;
-        border-radius:var(--mx-r-pill);
-        background:var(--mx-ink);
-        color:#fff;
-        font-family:var(--mx-font);
-        font-size:18px;
-        font-weight:800;
-        letter-spacing:-.01em;
-        white-space:nowrap;
-        box-shadow:var(--mx-shadow-sm);
+        display:none;
     }
 
     /* La barra deja de apilarse en columna: fila 1 = cuenta + paginacion,
