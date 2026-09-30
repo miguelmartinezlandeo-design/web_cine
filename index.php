@@ -128,6 +128,31 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 </main>
 
+<script>
+/* AGENTS.md - Carril de categorias con scroll horizontal flotante.
+   overflow-x:auto por si solo NO responde a la rueda vertical del raton:
+   al pasar el cursor por encima del carril la rueda seguia bajando la
+   pagina. Aqui se traduce deltaY a scrollLeft, solo cuando el cursor esta
+   sobre el carril y este tiene contenido desplazable. En los bordes se
+   devuelve el control a la pagina para no atrapar al usuario. */
+(function () {
+    var carril = document.querySelector('.nav-filtros');
+    if (!carril) return;
+
+    carril.addEventListener('wheel', function (e) {
+        var max = carril.scrollWidth - carril.clientWidth;
+        if (max <= 0) return;
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+        var antes = carril.scrollLeft;
+        if ((antes <= 0 && e.deltaY < 0) || (antes >= max && e.deltaY > 0)) return;
+
+        e.preventDefault();
+        carril.scrollLeft = antes + e.deltaY;
+    }, { passive: false });
+})();
+</script>
+
 <?php
 require_once 'script/script.php';
 require_once 'app/vistas/pie.php';

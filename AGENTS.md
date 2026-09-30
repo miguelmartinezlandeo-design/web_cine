@@ -75,3 +75,33 @@
 
 - **Vista Móvil (`@media (max-width: 768px)`):**
   - Mantener `flex-direction: row;` (o una grilla de máximo 2 filas súper compactas sin fondos dobles).
+
+  # Carril de Categorías con Scroll Horizontal Flotante (index.php)
+
+- **Estructura Fija vs. Desplazable (Flexbox de 3 bloques):**
+  - **Extremo Izquierdo (Fijo):** El botón de Usuario/Cuenta permanece estático a la izquierda (`flex-shrink: 0`).
+  - **Extremo Derecho (Fijo):** Los botones de paginación ('Anterior' / 'Siguiente') permanecen estáticos a la derecha (`flex-shrink: 0`).
+  - **Centro (Carril Desplazable):** El contenedor de las categorías (`Todas`, `Terror`, `Comedia`, `Ficción`, etc.) debe tener `flex: 1`, `overflow-x: auto` y `white-space: nowrap`.
+
+- **Experiencia Táctil y Cursor:**
+  - Ocultar la barra de desplazamiento visual para un acabado estético (`::-webkit-scrollbar { display: none; }` y `scrollbar-width: none;`).
+  - Activar el desplazamiento nativo por arrastre táctil con el dedo en móviles y mediante la rueda/cursor del ratón en escritorio (`-webkit-overflow-scrolling: touch;`).
+
+## Implementación del Carril de Categorías (aplicado)
+
+- **Contenedor único (`.filtro-botones`, que es el mismo `<nav>` que `.nav-filtros`):**
+  - `flex: 1` + `min-width: 0` para que sea el único bloque que cede espacio frente a Cuenta y Paginación.
+  - `overflow-x: auto` + `white-space: nowrap` en el **contenedor** (no solo en cada `<a>`), de modo que las categorías nunca se parten en dos líneas.
+  - Barra de scroll oculta: `scrollbar-width: none` + `::-webkit-scrollbar { display: none; }`.
+  - `-webkit-overflow-scrolling: touch;` va en la **regla base**, no dentro de `@media (max-width: 768px)`, para que el arrastre con el dedo sea fluido en todo momento y no dependa del breakpoint.
+
+- **Extremos fijos:**
+  - `.nav-cuenta` y `.nav-paginacion` llevan `flex: 0 0 auto` (equivalente a `flex-shrink: 0`): permanecen estáticos mientras el carril central se desplaza.
+
+- **Rueda del ratón en escritorio (requiere JS):**
+  - `overflow-x: auto` **no** reacciona a la rueda vertical: sin esto, al pasar el cursor por el carril la rueda seguía bajando la página.
+  - Se resuelve con un `<script>` inline en `index.php` que traduce `deltaY` a `scrollLeft` sobre `.nav-filtros`, con listener `{ passive: false }` para poder llamar a `preventDefault()`.
+  - Condiciones para no interceptar: el carril no tiene contenido desplazable, ya hay `deltaX` (trackpad), o se está en un borde desplazándose hacia fuera. En los bordes se devuelve el control a la página para no atrapar al usuario.
+  - **Ubicación:** inline en `index.php`, acotado a `.nav-filtros`. **No** se añade a `script/script.php` porque es compartido por todas las páginas y en la portada ya falla (`document.getElementById("form-comentario")` devuelve `null`), lo que cortaría la ejecución del resto del script. `index.php` tampoco carga `js/core.js`.
+
+- **Nota de aislamiento:** todo lo anterior vive en `estilo/index-modern.css` (que solo carga `index.php`) bajo el scope `.portada`, salvo el `<script>` del carril, que es el único punto de JS añadido y también vive exclusivamente en `index.php`. Ninguna página interna recibe estos cambios.
