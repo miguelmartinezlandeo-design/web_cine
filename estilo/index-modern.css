@@ -104,13 +104,30 @@
 }
 
 /* ========================= 3. MASTHEAD ========================= */
+/* Sangria a sangre para que el header comparta los mismos bordes que la
+   barra sticky de abajo (antes el header mide 1116 y la barra 1180). */
 .portada .cabecera-app{
     max-width:none;
-    width:100%;
-    margin:0;
-    padding:18px 0 0;
+    width:auto;
+    margin:0 calc(-1 * clamp(16px, 4vw, 32px));
+    padding:30px clamp(16px, 4vw, 32px) 26px;
     background:transparent;
     border-bottom:1px solid var(--mx-line);
+}
+
+/* Regla de acento bajo el logo */
+.portada .cabecera-app::after{
+    content:"";
+    display:block;
+    width:150px;
+    height:3px;
+    margin:22px auto 0;
+    border-radius:var(--mx-r-pill);
+    background:linear-gradient(90deg,
+        rgba(66,119,15,0),
+        var(--mx-brand) 35%,
+        var(--mx-accent) 65%,
+        rgba(245,197,24,0));
 }
 
 .portada .logo-app{
@@ -122,12 +139,14 @@
     align-items:center;
 }
 
+/* El logo natural es 950x182: antes se renderizaba al 46% (438x84).
+   Ahora ocupa hasta 880px de ancho real. */
 .portada .logo-app img.logo-desktop{
-    max-width:100%;
-    max-height:84px;          /* masthead compacto, no un banner de 172px */
-    width:auto;
+    width:100%;
+    max-width:880px;
     height:auto;
     object-fit:contain;
+    filter:drop-shadow(0 12px 26px rgba(15,13,24,.16));
 }
 
 /* Boton hamburguesa (solo movil) */
@@ -639,12 +658,16 @@
         display:flex;
         align-items:center;
         gap:12px;
-        padding:10px clamp(16px, 4vw, 32px);
+        margin:0 calc(-1 * clamp(16px, 4vw, 32px));
+        padding:12px clamp(16px, 4vw, 32px);
         background:rgba(255,255,255,.9);
         -webkit-backdrop-filter:blur(14px) saturate(1.6);
         backdrop-filter:blur(14px) saturate(1.6);
         box-shadow:var(--mx-shadow-sm);
         z-index:2000;
+    }
+    .portada .cabecera-app::after{
+        display:none;
     }
     .portada .hamburger{
         display:flex;
@@ -668,15 +691,16 @@
         flex:0 1 auto;
         align-items:center;
         gap:10px;
-        padding:9px 18px;
+        padding:11px 22px;
         border-radius:var(--mx-r-pill);
         background:var(--mx-ink);
         color:#fff;
         font-family:var(--mx-font);
-        font-size:17px;
+        font-size:18px;
         font-weight:800;
         letter-spacing:-.01em;
         white-space:nowrap;
+        box-shadow:var(--mx-shadow-sm);
     }
 
     /* La barra deja de apilarse en columna: fila 1 = cuenta + paginacion,
