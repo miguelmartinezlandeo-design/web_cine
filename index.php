@@ -130,15 +130,20 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 <script>
 /* AGENTS.md - Carril de categorias con scroll horizontal flotante.
-   overflow-x:auto por si solo NO responde a la rueda vertical del raton:
-   al pasar el cursor por encima del carril la rueda seguia bajando la
-   pagina. Aqui se traduce deltaY a scrollLeft, solo cuando el cursor esta
-   sobre el carril y este tiene contenido desplazable. En los bordes se
-   devuelve el control a la pagina para no atrapar al usuario. */
+   Prioritario: que se pueda desplazar con la rueda del raton y, tambien, con
+   arrastre (click y arrastrar) en escritorio. El arrastre con el dedo ya
+   funciona via -webkit-overflow-scrolling:touch.
+
+   Reglas:
+   - Traduce deltaY a scrollLeft cuando hay desbordamiento y cursor sobre carril.
+   - No intercepta si hay deltaX (trackpad) o si esta en borde (deja pasar).
+   - Permite drag con raton: isDown + mousemove actualiza scrollLeft usando
+     el offset inicial del cursor respecto al carril. */
 (function () {
     var carril = document.querySelector('.nav-filtros');
     if (!carril) return;
 
+    // 1) Rueda del raton / trackpad
     carril.addEventListener('wheel', function (e) {
         var max = carril.scrollWidth - carril.clientWidth;
         if (max <= 0) return;
@@ -150,6 +155,51 @@ if ($result && mysqli_num_rows($result) > 0) {
         e.preventDefault();
         carril.scrollLeft = antes + e.deltaY;
     }, { passive: false });
+
+    // 2) Arrastre con raton (click y arrastrar)
+    var UMbral = 5;           // px de margen para distinguir clic de arrastre
+    var isDown = false;
+    var movido = false;
+    var inicioX = 0;
+    var inicioScroll = 0;
+    var inicioClienteX = 0;
+
+    carril.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        isDown = true;
+        movido = false;
+        inicioClienteX = e.clientX;
+        inicioScroll = carril.scrollLeft;
+        carril.classList.add('filtro-botones--dragging');
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        if (!isDown) return;
+        e.preventDefault();
+        if (Math.abs(e.clientX - inicioClienteX) > UMbral) movido = true;
+        carril.scrollLeft = inicioScroll - (e.clientX - inicioClienteX);
+    });
+
+    document.addEventListener('mouseup', function () {
+        if (!isDown) return;
+        isDown = false;
+        carril.classList.remove('filtro-botones--dragging');
+    });
+
+    // Tras un arrastre real el navegador aun dispara click sobre la pilora:
+    // se cancela para no navegar a la categoria por accident.
+    carril.addEventListener('click', function (e) {
+        if (!movido) return;
+        movido = false;
+        e.preventDefault();
+        e.stopPropagation();
+    }, true);
+
+    // 3) Cursor de "agarrar" solo cuando hay contenido que desplazar
+    if (carril.scrollWidth - carril.clientWidth > 0) {
+        carril.style.cursor = 'grab';
+    }
 })();
 </script>
 

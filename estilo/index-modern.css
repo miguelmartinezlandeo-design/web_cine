@@ -184,14 +184,15 @@
     justify-content:flex-start;
 }
 
-/* 2. Centro: filtros. Es lo unico que cede espacio; min-width:0 permite que
-   el carril se encoja y scrollee en vez de desbordar la barra. */
+/* En escritorio el carril queda justificado a la izquierda para permitir
+   que la rueda/arrastre pueda llegar al inicio cuando hay desbordamiento.
+   En movil ya lo tenemos en flex-start. */
 .portada .nav-filtros{
     flex:1;
     min-width:0;
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
     gap:8px;
 }
 
@@ -244,7 +245,7 @@
     display:flex;
     flex-wrap:nowrap;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
     gap:8px;
     margin:0;
     padding:0;
@@ -259,6 +260,15 @@
 }
 .portada .filtro-botones::-webkit-scrollbar{
     display:none;
+}
+/* Cursor de arrastre cuando el carril tiene contenido desplazable.
+   La clase .filtro-botones--dragging se aplica via JS en index.php. */
+.portada .filtro-botones:active{
+    cursor:grabbing;
+}
+.portada .filtro-botones.filtro-botones--dragging{
+    cursor:grabbing;
+    user-select:none;
 }
 
 .portada .filtro-botones a{
