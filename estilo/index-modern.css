@@ -145,7 +145,7 @@
     color:var(--mx-accent);
     font-size:19px;
     cursor:pointer;
-    transition:transform var(--mx-t-fast), background var(--mx-t-fast);
+    transition:transform var(--mx-t-fast), background var(--mx-t-fast), box-shadow var(--mx-t-fast);
 }
 .portada .hamburger:hover{
     transform:translateY(-1px);
@@ -665,6 +665,13 @@
         /* Por encima del panel flotante: siempre se puede cerrar */
         z-index:2020;
     }
+    /* Anillo de contraste SOLO con el menu abierto. :has() evita tocar el
+       JS compartido de cabecera.php (app/vistas/cabecera.php) y mantiene el
+       efecto acotado a .portada. Sin soporte de :has() el menu sigue
+       funcionando, simplemente sin anillo. */
+    .portada .wrapper:has(.menu-movil.activo) .hamburger{
+        box-shadow:0 0 0 1px rgba(255,255,255,.14);
+    }
     .portada .logo-app{
         width:auto;
         flex:1 1 auto;
@@ -685,31 +692,32 @@
         display:none;
     }
 
-    /* AGENTS.md: el desplegable FLOTA sobre las publicaciones.
-       Fuera del flujo (fixed) => no empuja el contenido ni mueve el layout.
-       Fondo semi-transparente + blur, por encima de la cabecera. */
+    /* AGENTS.md: el desplegable es una TARJETA FLOTANTE glassmorphism,
+       no un cajon pegado al borde. Margenes de 12px y radio 16px en las
+       4 esquinas. Fixed => no empuja el contenido ni mueve el layout. */
     .portada .menu-movil{
         position:fixed;
-        top:0;
-        right:0;
-        bottom:0;
+        top:12px;
+        right:12px;
+        bottom:12px;
         left:auto;
         width:min(320px, 86vw);
         max-width:none;
         max-height:none !important;
         margin:0;
-        padding:calc(env(safe-area-inset-top) + 72px) 16px 24px;
+        padding:calc(env(safe-area-inset-top) + 18px) 14px 18px;
         display:flex;
         flex-direction:column;
         gap:6px;
         overflow-y:auto;
-        background:rgba(255,255,255,.95);
-        -webkit-backdrop-filter:blur(8px) saturate(1.5);
-        backdrop-filter:blur(8px) saturate(1.5);
-        border-left:1px solid var(--mx-line);
-        box-shadow:var(--mx-shadow-lg);
+        background:rgba(18,18,20,.85);
+        -webkit-backdrop-filter:blur(12px) saturate(1.5);
+        backdrop-filter:blur(12px) saturate(1.5);
+        border:1px solid rgba(255,255,255,.1);
+        border-radius:16px;
+        box-shadow:0 24px 60px rgba(8,8,12,.45);
         z-index:2010;
-        transform:translateX(105%);
+        transform:translateX(calc(100% + 24px));
         visibility:hidden;
         transition:transform var(--mx-t), visibility var(--mx-t);
     }
@@ -720,18 +728,25 @@
     .portada .menu-movil a{
         padding:13px 14px;
         border:0;
-        border-radius:var(--mx-r-sm);
-        color:var(--mx-ink);
+        border-radius:8px;
+        color:rgba(255,255,255,.92);
         font-weight:600;
         text-decoration:none;
         transition:background var(--mx-t-fast), color var(--mx-t-fast);
     }
-    .portada .menu-movil a:hover{
-        background:var(--mx-brand-tint);
-        color:var(--mx-brand);
+    /* Pastilla sutil en hover/focus: mantiene el contraste sin gritar */
+    .portada .menu-movil a:hover,
+    .portada .menu-movil a:focus-visible{
+        background:rgba(255,255,255,.1);
+        color:#fff;
     }
     .portada .menu-movil a.link-salir{
-        color:#c0362c;
+        color:#ff8a80;
+    }
+    .portada .menu-movil a.link-salir:hover,
+    .portada .menu-movil a.link-salir:focus-visible{
+        background:rgba(255,138,128,.14);
+        color:#ffb4ac;
     }
 
     /* La barra deja de apilarse en columna: fila 1 = cuenta + paginacion,
