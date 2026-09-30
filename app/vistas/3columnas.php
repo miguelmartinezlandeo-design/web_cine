@@ -5,11 +5,12 @@ if(mysqli_num_rows($result) >= 1){
     $res_f = mysqli_query($conn, "SELECT * FROM FotosP WHERE Idnoticia=" . $row['Idnoticia']);
     $foto = mysqli_fetch_array($res_f);
     $id_e = urlencode(base64_encode($row['Idnoticia']));
+    $alt_principal = htmlspecialchars($row['Titulo']);
 
     echo "<div class='noticia-principal-v2'>
             <a href='mostrarnoticia.php?id=$id_e'>
                 <div class='caja-foto-grande'>
-                    <img src='".BASE_URL."/".$foto['Foton']."'>
+                    <img src='".BASE_URL.$foto['Foton']."' alt='$alt_principal' fetchpriority='high'>
                     <div class='texto-titular'>
                         <h2>{$row['Titulo']}</h2>
                     </div>
@@ -23,11 +24,12 @@ if(mysqli_num_rows($result) >= 1){
         $res_f = mysqli_query($conn, "SELECT * FROM FotosP WHERE Idnoticia=" . $row['Idnoticia']);
         $foto = mysqli_fetch_array($res_f);
         $id_e = urlencode(base64_encode($row['Idnoticia']));
-        
+        $alt_tarjeta = htmlspecialchars($row['Titulo']);
+
         echo "<div class='tarjeta-noticia'>
                 <a href='mostrarnoticia.php?id=$id_e'>
                     <div class='crop-foto'>
-                        <img src='".BASE_URL.$foto['Foton']."'>
+                        <img src='".BASE_URL.$foto['Foton']."' alt='$alt_tarjeta' loading='lazy'>
                     </div>
                     <div class='tarjeta-info'>
                         <h3>{$row['Titulo']}</h3>

@@ -9,8 +9,8 @@
 /* ========================= 1. TOKENS ========================= */
 .portada{
     /* Marca: el logo usa verde lima (#6fbb20) + amarillo sobre tinta */
-    --mx-brand:        #4e8a12;   /* lima oscurecido -> AA sobre blanco */
-    --mx-brand-hover:  #3d6d0d;
+    --mx-brand:        #42770f;   /* lima oscurecido -> AA sobre blanco */
+    --mx-brand-hover:  #33610b;
     --mx-brand-tint:   #eef7e0;
     --mx-accent:       #f5c518;   /* amarillo de marca (sobre tinta)   */
 
@@ -327,14 +327,14 @@
     aspect-ratio:16 / 9;
     max-height:520px;
     margin:auto;
-    overflow:hidden;
+    overflow:hidden !important;
     border-radius:0;
 }
 
 .portada .caja-foto-grande img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
     display:block;
     transform:scale(1.01);
     transition:transform var(--mx-t-slow);
@@ -343,17 +343,19 @@
     transform:scale(1.06);
 }
 
+/* !important: neutraliza el overlay legacy (position:static + fondo blanco)
+   que en movil dejaba el titular en blanco sobre blanco. */
 .portada .texto-titular{
-    position:absolute;
+    position:absolute !important;
     inset:auto 0 0 0;
     width:100%;
     box-sizing:border-box;
-    padding:clamp(24px, 4vw, 44px);
-    background:linear-gradient(to top, rgba(8,1,36,.94) 12%, rgba(8,1,36,.72) 48%, rgba(8,1,36,0) 100%);
+    padding:clamp(24px, 4vw, 44px) !important;
+    background:linear-gradient(to top, rgba(8,1,36,.94) 12%, rgba(8,1,36,.72) 48%, rgba(8,1,36,0) 100%) !important;
     transition:background var(--mx-t);
 }
 .portada .noticia-principal-v2:hover .texto-titular{
-    background:linear-gradient(to top, rgba(8,1,36,.97) 18%, rgba(8,1,36,.8) 55%, rgba(8,1,36,0) 100%);
+    background:linear-gradient(to top, rgba(8,1,36,.97) 18%, rgba(8,1,36,.8) 55%, rgba(8,1,36,0) 100%) !important;
 }
 
 /* Kicker "Destacado" generado por CSS (sin tocar el PHP) */
@@ -375,13 +377,13 @@
 .portada .texto-titular h2{
     margin:0;
     max-width:22ch;
-    color:#fff;
+    color:#fff !important;
     font-family:var(--mx-font);
-    font-size:clamp(24px, 4.2vw, 44px);
+    font-size:clamp(24px, 4.2vw, 44px) !important;
     font-weight:800;
     line-height:1.12;
     letter-spacing:-.02em;
-    text-shadow:0 2px 18px rgba(8,1,36,.6);
+    text-shadow:0 2px 18px rgba(8,1,36,.75) !important;
 }
 
 /* ========================= 6. GRILLA DE TARJETAS ========================= */
@@ -475,14 +477,6 @@
 }
 .portada .tarjeta-noticia:hover .tarjeta-info h3{
     color:var(--mx-brand-hover) !important;
-}
-
-/* Subrayado de acento que crece al hacer hover */
-.portada .tarjeta-noticia:hover .tarjeta-info h3{
-    text-decoration:underline;
-    text-decoration-color:var(--mx-brand);
-    text-decoration-thickness:3px;
-    text-underline-offset:5px;
 }
 
 /* ========================= 7. SECCION ARCHIVO ========================= */
@@ -671,9 +665,10 @@
     }
     .portada .marca-movil{
         display:flex;
+        flex:0 1 auto;
         align-items:center;
         gap:10px;
-        padding:9px 16px;
+        padding:9px 18px;
         border-radius:var(--mx-r-pill);
         background:var(--mx-ink);
         color:#fff;
@@ -684,22 +679,38 @@
         white-space:nowrap;
     }
 
-    /* Barra de filtros pasa a carril deslizable y se centra */
+    /* La barra deja de apilarse en columna: fila 1 = cuenta + paginacion,
+       fila 2 = carril horizontal de categorias. */
+    .portada .barra-superior{
+        flex-direction:row !important;
+        flex-wrap:wrap;
+        align-items:center !important;
+        gap:10px;
+        padding:10px clamp(16px, 4vw, 32px);
+    }
+    .portada .superior-izq,
+    .portada .superior-der{
+        flex:0 0 auto;
+    }
+    .portada .superior-der{
+        margin-left:auto;
+    }
+    /* El carril de categorias se recupera en movil (estilo1 lo oculta) */
     .portada .superior-centro{
-        flex:1 1 auto;
+        display:flex !important;
+        flex:1 1 100%;
+        order:3;
+        min-width:0;
         justify-content:flex-start;
     }
     .portada .filtro-botones{
+        width:100%;
         justify-content:flex-start;
         -webkit-overflow-scrolling:touch;
         scroll-snap-type:x proximity;
     }
     .portada .filtro-botones a{
         scroll-snap-align:center;
-    }
-    .portada .superior-izq,
-    .portada .superior-der{
-        flex:0 0 auto;
     }
 
     /* Hero: 16/9 se mantiene, titulo mas contenido */
@@ -732,8 +743,8 @@
     .portada .btn-paginacion{
         padding:0 16px;
     }
-    .portada .btn-paginacion,
-    .portada .btn-usuario{
+    .portada .btn-usuario,
+    .portada .btn-paginacion{
         height:38px;
     }
     .portada .seccion-archivo{

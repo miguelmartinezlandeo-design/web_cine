@@ -16,7 +16,7 @@ if ($result2 = mysqli_query($conn, $phpnoticia1)) {
             <div class='item-lista-dos'>
                 <a href='mostrarnoticia.php?id=$id_e' class='enlace-noticia'>
                     <div class='mini-foto'>
-                        <img src='".BASE_URL.$foto['Foton']."' alt='thumb'>
+                        <img src='".BASE_URL.$foto['Foton']."' alt='thumb' loading='lazy'>
                     </div>
                     <div class='mini-texto'>
                         <h4>{$row['Titulo']}</h4>
