@@ -41,8 +41,10 @@ if ($menubar == "" || $menubar == "0") {
                    WHERE cp.Idcategoriap = '$menubar_clean' 
                    ORDER BY n.Idnoticia DESC";
 
-    $phpnoticia  = $base_query . " LIMIT 7";
-    $phpnoticia1 = $base_query . " LIMIT 6 OFFSET 7";
+    $offset = ($numero == "2") ? 7 : 0;
+    $nuevo_offset = $offset + 7;
+    $phpnoticia  = $base_query . " LIMIT 7 OFFSET $offset";
+    $phpnoticia1 = $base_query . " LIMIT 6 OFFSET $nuevo_offset";
 }
 
 $result = mysqli_query($conn, $phpnoticia);

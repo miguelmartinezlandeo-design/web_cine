@@ -643,7 +643,8 @@
         top:0;
         display:flex;
         align-items:center;
-        gap:12px;
+        /* AGENTS.md: gap 10px para que el logo nunca pise el hamburger */
+        gap:10px;
         width:100%;
         max-width:100%;
         margin:0;
@@ -661,7 +662,8 @@
         align-items:center;
         justify-content:center;
         flex-shrink:0;
-        z-index:2001;
+        /* Por encima del panel flotante: siempre se puede cerrar */
+        z-index:2020;
     }
     .portada .logo-app{
         width:auto;
@@ -681,6 +683,55 @@
     }
     .portada .marca-movil{
         display:none;
+    }
+
+    /* AGENTS.md: el desplegable FLOTA sobre las publicaciones.
+       Fuera del flujo (fixed) => no empuja el contenido ni mueve el layout.
+       Fondo semi-transparente + blur, por encima de la cabecera. */
+    .portada .menu-movil{
+        position:fixed;
+        top:0;
+        right:0;
+        bottom:0;
+        left:auto;
+        width:min(320px, 86vw);
+        max-width:none;
+        max-height:none !important;
+        margin:0;
+        padding:calc(env(safe-area-inset-top) + 72px) 16px 24px;
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+        overflow-y:auto;
+        background:rgba(255,255,255,.95);
+        -webkit-backdrop-filter:blur(8px) saturate(1.5);
+        backdrop-filter:blur(8px) saturate(1.5);
+        border-left:1px solid var(--mx-line);
+        box-shadow:var(--mx-shadow-lg);
+        z-index:2010;
+        transform:translateX(105%);
+        visibility:hidden;
+        transition:transform var(--mx-t), visibility var(--mx-t);
+    }
+    .portada .menu-movil.activo{
+        transform:translateX(0);
+        visibility:visible;
+    }
+    .portada .menu-movil a{
+        padding:13px 14px;
+        border:0;
+        border-radius:var(--mx-r-sm);
+        color:var(--mx-ink);
+        font-weight:600;
+        text-decoration:none;
+        transition:background var(--mx-t-fast), color var(--mx-t-fast);
+    }
+    .portada .menu-movil a:hover{
+        background:var(--mx-brand-tint);
+        color:var(--mx-brand);
+    }
+    .portada .menu-movil a.link-salir{
+        color:#c0362c;
     }
 
     /* La barra deja de apilarse en columna: fila 1 = cuenta + paginacion,
