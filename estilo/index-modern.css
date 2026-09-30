@@ -1,0 +1,781 @@
+/* =====================================================================
+   PORTADA MODERNA  ·  index.php
+   Capa de estilos aislada: TODAS las reglas viven bajo .portada,
+   por lo que el resto de paginas (mostrarnoticia, usuario, registro,
+   admin) conservan su aspecto actual sin ningun riesgo de regresion.
+   Se carga despues de estilo1.css, asi que actua como capa de override.
+   ===================================================================== */
+
+/* ========================= 1. TOKENS ========================= */
+.portada{
+    /* Marca: el logo usa verde lima (#6fbb20) + amarillo sobre tinta */
+    --mx-brand:        #4e8a12;   /* lima oscurecido -> AA sobre blanco */
+    --mx-brand-hover:  #3d6d0d;
+    --mx-brand-tint:   #eef7e0;
+    --mx-accent:       #f5c518;   /* amarillo de marca (sobre tinta)   */
+
+    /* Neutros */
+    --mx-canvas:       #f4f5f7;
+    --mx-surface:      #ffffff;
+    --mx-ink:          #0f0d18;
+    --mx-ink-soft:     #3f3d4d;
+    --mx-muted:        #6f6e85;
+    --mx-line:         #e7e8ee;
+    --mx-line-strong:  #d8dae3;
+
+    /* Radios */
+    --mx-r-sm:  10px;
+    --mx-r-md:  16px;
+    --mx-r-lg:  22px;
+    --mx-r-xl:  28px;
+    --mx-r-pill: 999px;
+
+    /* Sombras suaves en capas */
+    --mx-shadow-xs: 0 1px 2px rgba(15,13,24,.05);
+    --mx-shadow-sm: 0 2px 6px rgba(15,13,24,.06), 0 1px 2px rgba(15,13,24,.04);
+    --mx-shadow-md: 0 8px 20px rgba(15,13,24,.07), 0 2px 6px rgba(15,13,24,.04);
+    --mx-shadow-lg: 0 18px 40px rgba(15,13,24,.12), 0 4px 12px rgba(15,13,24,.06);
+
+    /* Movimiento */
+    --mx-t-fast: .16s cubic-bezier(.4,0,.2,1);
+    --mx-t:      .28s cubic-bezier(.4,0,.2,1);
+    --mx-t-slow: .55s cubic-bezier(.4,0,.2,1);
+
+    /* Tipografia fluida */
+    --mx-font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mx-measure: 1180px;
+}
+
+/* ========================= 2. BASE ========================= */
+.portada,
+.portada body{
+    background:var(--mx-canvas);
+    color:var(--mx-ink);
+    font-family:var(--mx-font);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+.portada .wrapper{
+    width:100%;
+    max-width:var(--mx-measure);
+    margin:0 auto;
+    padding:0 clamp(16px, 4vw, 32px);
+}
+
+.portada .area-noticias-moderna{
+    display:block;
+    padding-bottom:8px;
+}
+
+.portada img{
+    max-width:100%;
+    display:block;
+}
+
+/* ---- Enlace de salto (accesibilidad) ---- */
+.portada .saltar-al-contenido{
+    position:absolute;
+    left:50%;
+    top:8px;
+    z-index:3000;
+    transform:translate(-50%,-180%);
+    padding:12px 22px;
+    border-radius:var(--mx-r-pill);
+    background:var(--mx-ink);
+    color:#fff;
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
+    box-shadow:var(--mx-shadow-lg);
+    transition:transform var(--mx-t);
+}
+.portada .saltar-al-contenido:focus-visible{
+    transform:translate(-50%,0);
+}
+
+/* ---- Foco visible unificado ---- */
+.portada :where(a, button, input, textarea, select):focus-visible{
+    outline:3px solid var(--mx-brand);
+    outline-offset:3px;
+    border-radius:var(--mx-r-sm);
+}
+
+/* ========================= 3. MASTHEAD ========================= */
+.portada .cabecera-app{
+    max-width:none;
+    width:100%;
+    margin:0;
+    padding:18px 0 0;
+    background:transparent;
+    border-bottom:1px solid var(--mx-line);
+}
+
+.portada .logo-app{
+    width:100%;
+    max-width:none;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.portada .logo-app img.logo-desktop{
+    max-width:100%;
+    max-height:84px;          /* masthead compacto, no un banner de 172px */
+    width:auto;
+    height:auto;
+    object-fit:contain;
+}
+
+/* Boton hamburguesa (solo movil) */
+.portada .hamburger{
+    display:none;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:12px;
+    background:var(--mx-ink);
+    color:var(--mx-accent);
+    font-size:19px;
+    cursor:pointer;
+    transition:transform var(--mx-t-fast), background var(--mx-t-fast);
+}
+.portada .hamburger:hover{
+    transform:translateY(-1px);
+}
+
+/* ========================= 4. BARRA STICKY ========================= */
+.portada .barra-superior{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    max-width:none;
+    width:calc(100% + clamp(16px, 4vw, 32px) * 2);
+    margin:0 0 24px;
+    padding:12px clamp(16px, 4vw, 32px);
+    background:rgba(255,255,255,.82);
+    -webkit-backdrop-filter:blur(14px) saturate(1.6);
+    backdrop-filter:blur(14px) saturate(1.6);
+    border-bottom:1px solid var(--mx-line);
+    box-shadow:0 1px 0 rgba(15,13,24,.02), 0 6px 18px rgba(15,13,24,.04);
+}
+
+.portada .superior-izq{
+    flex:1 1 0;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+}
+
+.portada .superior-centro{
+    flex:0 1 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+}
+
+.portada .superior-der{
+    flex:1 1 0;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+}
+
+/* ---- Boton Cuenta ---- */
+.portada .btn-usuario{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    height:40px;
+    padding:0 18px 0 8px;
+    border:1px solid var(--mx-line-strong);
+    border-radius:var(--mx-r-pill);
+    background:var(--mx-surface);
+    color:var(--mx-ink);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    box-shadow:var(--mx-shadow-xs);
+    transition:transform var(--mx-t-fast), box-shadow var(--mx-t-fast), border-color var(--mx-t-fast);
+}
+.portada .btn-usuario:hover{
+    transform:translateY(-1px);
+    border-color:var(--mx-brand);
+    box-shadow:var(--mx-shadow-sm);
+}
+.portada .btn-usuario img{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--mx-brand-tint);
+}
+
+/* ---- Pildoras de categoria ---- */
+.portada .filtro-botones{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin:0;
+    padding:4px;
+    border-radius:var(--mx-r-pill);
+    background:rgba(15,13,24,.045);
+    max-width:100%;
+    overflow-x:auto;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+}
+.portada .filtro-botones::-webkit-scrollbar{
+    display:none;
+}
+
+.portada .filtro-botones a{
+    display:inline-flex;
+    align-items:center;
+    height:32px;
+    padding:0 16px;
+    flex:0 0 auto;
+    white-space:nowrap;
+    border:none;
+    border-radius:var(--mx-r-pill);
+    background:transparent;
+    color:var(--mx-ink-soft);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:color var(--mx-t-fast), background var(--mx-t-fast), transform var(--mx-t-fast);
+}
+.portada .filtro-botones a:hover{
+    background:var(--mx-surface);
+    color:var(--mx-ink);
+    transform:translateY(-1px);
+    box-shadow:var(--mx-shadow-xs);
+}
+.portada .filtro-botones a.activo{
+    background:var(--mx-ink);
+    color:#fff;
+    box-shadow:var(--mx-shadow-sm);
+}
+.portada .filtro-botones a.activo:hover{
+    background:var(--mx-ink);
+    color:#fff;
+}
+
+/* ---- Paginacion ---- */
+.portada .btn-paginacion{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    height:40px;
+    padding:0 20px;
+    border-radius:var(--mx-r-pill);
+    background:var(--mx-ink);
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
+    box-shadow:var(--mx-shadow-sm);
+    transition:transform var(--mx-t-fast), box-shadow var(--mx-t-fast), background var(--mx-t-fast);
+}
+.portada .btn-paginacion:hover{
+    background:var(--mx-ink);
+    transform:translateY(-2px);
+    box-shadow:var(--mx-shadow-md);
+}
+.portada .btn-paginacion span{
+    display:inline-block;
+    transition:transform var(--mx-t);
+}
+.portada .btn-paginacion:hover span{
+    transform:translateX(4px);
+}
+
+/* ========================= 5. HERO ========================= */
+.portada .noticia-principal-v2{
+    max-width:none;
+    margin:0 0 34px;
+    border-radius:var(--mx-r-xl);
+    overflow:hidden;
+    background:var(--mx-ink);
+    box-shadow:var(--mx-shadow-lg);
+}
+
+.portada .noticia-principal-v2 > a{
+    display:block;
+    text-decoration:none;
+}
+
+.portada .caja-foto-grande{
+    position:relative;
+    width:100%;
+    max-width:none;
+    height:auto;
+    aspect-ratio:16 / 9;
+    max-height:520px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:0;
+}
+
+.portada .caja-foto-grande img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transform:scale(1.01);
+    transition:transform var(--mx-t-slow);
+}
+.portada .noticia-principal-v2:hover .caja-foto-grande img{
+    transform:scale(1.06);
+}
+
+.portada .texto-titular{
+    position:absolute;
+    inset:auto 0 0 0;
+    width:100%;
+    box-sizing:border-box;
+    padding:clamp(24px, 4vw, 44px);
+    background:linear-gradient(to top, rgba(8,1,36,.94) 12%, rgba(8,1,36,.72) 48%, rgba(8,1,36,0) 100%);
+    transition:background var(--mx-t);
+}
+.portada .noticia-principal-v2:hover .texto-titular{
+    background:linear-gradient(to top, rgba(8,1,36,.97) 18%, rgba(8,1,36,.8) 55%, rgba(8,1,36,0) 100%);
+}
+
+/* Kicker "Destacado" generado por CSS (sin tocar el PHP) */
+.portada .texto-titular::before{
+    content:"Destacado";
+    display:inline-block;
+    margin-bottom:14px;
+    padding:6px 14px;
+    border-radius:var(--mx-r-pill);
+    background:var(--mx-accent);
+    color:var(--mx-ink);
+    font-family:var(--mx-font);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+}
+
+.portada .texto-titular h2{
+    margin:0;
+    max-width:22ch;
+    color:#fff;
+    font-family:var(--mx-font);
+    font-size:clamp(24px, 4.2vw, 44px);
+    font-weight:800;
+    line-height:1.12;
+    letter-spacing:-.02em;
+    text-shadow:0 2px 18px rgba(8,1,36,.6);
+}
+
+/* ========================= 6. GRILLA DE TARJETAS ========================= */
+.portada .grilla-noticias{
+    display:grid !important;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)) !important;
+    grid-template-rows:none !important;
+    gap:26px !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 0 8px !important;
+    padding:0 !important;
+}
+
+.portada .tarjeta-noticia{
+    display:flex !important;
+    flex-direction:column;
+    width:100% !important;
+    height:100%;
+    overflow:hidden;
+    background:var(--mx-surface);
+    border:1px solid var(--mx-line);
+    border-radius:var(--mx-r-lg);
+    box-shadow:var(--mx-shadow-sm);
+    transition:transform var(--mx-t), box-shadow var(--mx-t), border-color var(--mx-t);
+}
+.portada .tarjeta-noticia:hover{
+    transform:translateY(-6px) !important;
+    border-color:var(--mx-line-strong);
+    box-shadow:var(--mx-shadow-lg) !important;
+}
+
+.portada .tarjeta-noticia > a{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    text-decoration:none;
+}
+
+.portada .crop-foto{
+    position:relative;
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:16 / 10;
+    overflow:hidden !important;
+    background:var(--mx-line);
+}
+.portada .crop-foto img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    transition:transform var(--mx-t-slow) !important;
+}
+.portada .tarjeta-noticia:hover .crop-foto img{
+    transform:scale(1.07);
+}
+/* Brillo inferior sobre la foto */
+.portada .crop-foto::after{
+    content:"";
+    position:absolute;
+    inset:auto 0 0 0;
+    height:40%;
+    background:linear-gradient(to top, rgba(8,1,36,.28), rgba(8,1,36,0));
+    opacity:0;
+    transition:opacity var(--mx-t);
+}
+.portada .tarjeta-noticia:hover .crop-foto::after{
+    opacity:1;
+}
+
+.portada .tarjeta-info{
+    flex:1 1 auto;
+    display:flex;
+    align-items:flex-start;
+    padding:18px 20px 22px;
+}
+
+.portada .tarjeta-info h3{
+    margin:0;
+    color:var(--mx-ink);
+    font-family:var(--mx-font);
+    font-size:17px;
+    font-weight:700;
+    line-height:1.38;
+    letter-spacing:-.01em;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    transition:color var(--mx-t-fast);
+}
+.portada .tarjeta-noticia:hover .tarjeta-info h3{
+    color:var(--mx-brand-hover) !important;
+}
+
+/* Subrayado de acento que crece al hacer hover */
+.portada .tarjeta-noticia:hover .tarjeta-info h3{
+    text-decoration:underline;
+    text-decoration-color:var(--mx-brand);
+    text-decoration-thickness:3px;
+    text-underline-offset:5px;
+}
+
+/* ========================= 7. SECCION ARCHIVO ========================= */
+.portada .seccion-archivo{
+    margin:56px 0 24px;
+    padding-top:40px;
+    border-top:1px solid var(--mx-line);
+}
+
+.portada .titulo-seccion{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+    margin:0 0 28px;
+    color:var(--mx-ink);
+    font-family:var(--mx-font);
+    font-size:clamp(24px, 3vw, 32px);
+    font-weight:800;
+    line-height:1.15;
+    letter-spacing:-.02em;
+    text-align:left;
+}
+
+/* Antetitulo + regla de acento */
+.portada .antetitulo-seccion{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:var(--mx-brand);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+.portada .antetitulo-seccion::after{
+    content:"";
+    width:44px;
+    height:3px;
+    border-radius:var(--mx-r-pill);
+    background:linear-gradient(90deg, var(--mx-brand), var(--mx-accent));
+}
+
+.portada .contenedor-dos-columnas{
+    display:grid !important;
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    gap:18px !important;
+    margin:0 !important;
+    padding:0 !important;
+    border-top:none;
+}
+
+.portada .item-lista-dos{
+    background:var(--mx-surface);
+    border:1px solid var(--mx-line);
+    border-radius:var(--mx-r-md);
+    box-shadow:var(--mx-shadow-xs);
+    transition:transform var(--mx-t), box-shadow var(--mx-t), border-color var(--mx-t);
+}
+.portada .item-lista-dos:hover{
+    background:var(--mx-surface);
+    transform:translateY(-3px);
+    border-color:var(--mx-line-strong);
+    box-shadow:var(--mx-shadow-md);
+}
+
+.portada .enlace-noticia{
+    display:flex !important;
+    gap:16px;
+    padding:14px;
+    text-decoration:none;
+}
+
+.portada .mini-foto{
+    flex:0 0 112px;
+    height:86px;
+    overflow:hidden;
+    border-radius:var(--mx-r-sm);
+    background:var(--mx-line);
+}
+.portada .mini-foto img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform var(--mx-t-slow);
+}
+.portada .item-lista-dos:hover .mini-foto img{
+    transform:scale(1.08);
+}
+
+.portada .mini-texto{
+    min-width:0;
+    flex:1 1 auto;
+}
+.portada .mini-texto h4{
+    margin:0 0 6px;
+    color:var(--mx-ink);
+    font-family:var(--mx-font);
+    font-size:15px;
+    font-weight:700;
+    line-height:1.35;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    transition:color var(--mx-t-fast);
+}
+.portada .item-lista-dos:hover .mini-texto h4{
+    color:var(--mx-brand-hover);
+}
+.portada .mini-texto p{
+    margin:0;
+    color:var(--mx-muted);
+    font-family:var(--mx-font);
+    font-size:13px;
+    line-height:1.55;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+
+/* ========================= 8. PIE ========================= */
+.portada .pie{
+    margin:56px 0 0;
+    padding:0 0 32px;
+    text-align:center;
+}
+.portada .pie a{
+    display:block;
+    text-decoration:none;
+}
+.portada .pie-img{
+    width:100%;
+    max-width:none;
+    border-radius:var(--mx-r-lg);
+    box-shadow:var(--mx-shadow-md);
+    opacity:.92;
+}
+
+/* ========================= 9. RESPONSIVE ========================= */
+@media (max-width: 900px){
+    .portada .barra-superior{
+        gap:10px;
+    }
+    .portada .btn-usuario span{
+        display:none;
+    }
+    .portada .btn-usuario{
+        padding:0;
+        width:40px;
+        justify-content:center;
+    }
+}
+
+@media (max-width: 768px){
+    .portada .cabecera-app{
+        position:sticky;
+        top:0;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:10px clamp(16px, 4vw, 32px);
+        background:rgba(255,255,255,.9);
+        -webkit-backdrop-filter:blur(14px) saturate(1.6);
+        backdrop-filter:blur(14px) saturate(1.6);
+        box-shadow:var(--mx-shadow-sm);
+        z-index:2000;
+    }
+    .portada .hamburger{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-shrink:0;
+        z-index:2001;
+    }
+    .portada .logo-app{
+        width:auto;
+        flex:1 1 auto;
+        min-width:0;
+        margin:0;
+        justify-content:flex-start;
+    }
+    .portada .logo-app img.logo-desktop{
+        display:none !important;
+    }
+    .portada .marca-movil{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        padding:9px 16px;
+        border-radius:var(--mx-r-pill);
+        background:var(--mx-ink);
+        color:#fff;
+        font-family:var(--mx-font);
+        font-size:17px;
+        font-weight:800;
+        letter-spacing:-.01em;
+        white-space:nowrap;
+    }
+
+    /* Barra de filtros pasa a carril deslizable y se centra */
+    .portada .superior-centro{
+        flex:1 1 auto;
+        justify-content:flex-start;
+    }
+    .portada .filtro-botones{
+        justify-content:flex-start;
+        -webkit-overflow-scrolling:touch;
+        scroll-snap-type:x proximity;
+    }
+    .portada .filtro-botones a{
+        scroll-snap-align:center;
+    }
+    .portada .superior-izq,
+    .portada .superior-der{
+        flex:0 0 auto;
+    }
+
+    /* Hero: 16/9 se mantiene, titulo mas contenido */
+    .portada .caja-foto-grande{
+        max-height:none;
+    }
+    .portada .contenedor-dos-columnas{
+        grid-template-columns:1fr !important;
+        gap:14px !important;
+    }
+    .portada .grilla-noticias{
+        gap:18px !important;
+    }
+    .portada .seccion-archivo{
+        margin-top:40px;
+        padding-top:28px;
+    }
+}
+
+@media (max-width: 560px){
+    .portada .grilla-noticias{
+        grid-template-columns:1fr !important;
+    }
+    .portada .tarjeta-info{
+        padding:16px 18px 18px;
+    }
+    .portada .texto-titular{
+        padding:22px 18px;
+    }
+    .portada .btn-paginacion{
+        padding:0 16px;
+    }
+    .portada .btn-paginacion,
+    .portada .btn-usuario{
+        height:38px;
+    }
+    .portada .seccion-archivo{
+        margin-top:32px;
+        padding-top:24px;
+    }
+    .portada .enlace-noticia{
+        gap:12px;
+        padding:12px;
+    }
+    .portada .mini-foto{
+        flex:0 0 88px;
+        height:70px;
+    }
+}
+
+/* ========================= 10. PREFERS-REDUCED-MOTION ========================= */
+@media (prefers-reduced-motion: reduce){
+    .portada *,
+    .portada *::before,
+    .portada *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+        scroll-behavior:auto !important;
+    }
+    .portada .tarjeta-noticia:hover,
+    .portada .btn-usuario:hover,
+    .portada .btn-paginacion:hover,
+    .portada .item-lista-dos:hover{
+        transform:none;
+    }
+}
+
+/* ========================= 11. IMPRESION ========================= */
+@media print{
+    .portada .barra-superior,
+    .portada .hamburger,
+    .portada .menu-movil,
+    .portada .saltar-al-contenido{
+        display:none !important;
+    }
+    .portada{
+        background:#fff;
+    }
+}
