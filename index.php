@@ -58,18 +58,18 @@ $result = mysqli_query($conn, $phpnoticia);
 
 <main id="contenido" class="area-noticias-moderna">
 
-    <div class="barra-superior" role="group" aria-label="Controles de navegacion y paginacion">
+    <div class="navbar-filtros" role="group" aria-label="Controles de navegacion y paginacion">
 
-        <!-- IZQUIERDA -->
-        <div class="superior-izq">
+        <!-- 1. IZQUIERDA: Cuenta -->
+        <div class="nav-cuenta">
             <a href="<?= BASE_URL ?>usuario/usuario.php" class="btn-usuario">
                 <img src="<?= BASE_URL ?>imagen/user.png" alt="" width="24" height="24">
                 <span>Cuenta</span>
             </a>
         </div>
 
-        <!-- CENTRO -->
-        <nav class="superior-centro filtro-botones" aria-label="Filtrar noticias por categoria">
+        <!-- 2. CENTRO: Categorias -->
+        <nav class="nav-filtros filtro-botones" aria-label="Filtrar noticias por categoria">
 
             <a href="index.php"
             class="<?= ($menubar == "" || $menubar == "0") ? 'activo' : '' ?>"
@@ -94,8 +94,9 @@ $result = mysqli_query($conn, $phpnoticia);
 
         </nav>
 
-        <!-- DERECHA -->
-        <div class="superior-der">
+        <!-- 3. DERECHA: Paginacion -->
+
+        <div class="nav-paginacion">
 
             <?php if ($numero == 2): ?>
                 <a href="index.php?sigue=&menubar=<?= $menubar ?>" class="btn-paginacion">
