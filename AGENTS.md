@@ -60,3 +60,24 @@
 
 - **Alcance:**
   - Todas estas reglas del menú oscuro flotante se aplican **únicamente dentro de `.portada` (`index.php`)**[cite: 6]. Las páginas internas mantendrán su diseño original[cite: 6].
+
+  # Rediseño del Bloque de Filtros y Paginación (index.php)
+
+- **Unificación Visual:**
+  - Consolidar la barra superior (cuenta/paginación) y la barra inferior de categorías en un **único contenedor moderno**.
+  - Eliminar los grandes espacios en blanco intermedios.
+
+- **Estructura Interna:**
+  - **Filtros de Categorías:** Centrados, con estilo de píldoras sutiles (`border-radius: 20px`), destacando la categoría activa con fondo oscuro/contraste.
+  - **Paginación (Anterior / Siguiente):** Agrupar los botones de paginación a la derecha en un grupo compacto (`display: flex; gap: 8px`), reduciendo la altura excesiva del botón 'Siguiente'.
+  - **Botón Cuenta:** Mantener el acceso a cuenta en el extremo izquierdo alineado verticalmente al centro.
+
+- **Comportamiento en Móvil:**
+  - Las categorías deben permitir desplazamiento horizontal suave (`overflow-x: auto`) sin romper la pantalla.
+
+- **Ajustes Exclusivos del Móvil de `index.php` (no aplicar en escritorio ni en otras páginas):**
+  - Los dos ajustes siguientes rigen **únicamente** en la vista móvil de la portada (`@media (max-width: 768px)` bajo `.portada`). En escritorio se conserva el diseño actual.
+  - **Píldoras de categoría en móvil:** `border-radius: 20px` (radio recortado), sustituyendo la píldora completa (`999px`) que se usa en escritorio.
+  - **Grupo de paginación en móvil:** `display: flex; align-items: center; gap: 8px;` sobre `.superior-der`, para mantener el grupo compacto a la derecha.
+  - **Motivo:** en pantallas estrechas la píldora completa de escritorio ocupa demasiado ancho y deja fuera categorías; el radio de 20px y el `gap: 8px` densifican el bloque sin romper el carril con scroll horizontal.
+  - **Aislamiento:** todas las reglas viven en `estilo/index-modern.css`, que solo carga `index.php`, y dentro del scope `.portada`. Ninguna página interna (detalles, noticias, usuario, registro, admin) recibe estos cambios.
